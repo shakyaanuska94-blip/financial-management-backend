@@ -1,4 +1,5 @@
 ﻿from fastapi import FastAPI
+from mangum import Mangum
 from app.database import engine, Base
 from app.routes import students, clients, expenses, employees
 
@@ -18,3 +19,5 @@ app.include_router(employees.router)
 @app.get("/", tags=["Health"])
 def root():
     return {"message": "Financial Management API is running!"}
+
+handler = Mangum(app)
